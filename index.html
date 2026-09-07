@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio de Agustín Boeri Aedo - Ingeniería en Informática, backend y IA aplicada al sector aeroespacial.">
+    <title>Agustín Boeri Aedo | Portafolio</title>
+
+    <style>
+        /* ============================================================
+           1. VARIABLES DE COLOR
+           Definimos los colores UNA sola vez aquí. Todo el resto del CSS
+           los usa con var(--nombre). Así, para cambiar el tema completo
+           solo hay que cambiar estas variables.
+           ============================================================ */
+
+        /* Tema OSCURO = el tema por defecto de este sitio */
+        :root {
+            --bg: #0b1220;
+            --surface: #111c2e;
+            --surface-2: #16243a;
+            --text: #e6edf7;
+            --muted: #93a4bd;
+            --accent: #22d3ee;
+            --accent-2: #f59e0b;
+            --border: #1e2d45;
+            --radius: 10px;
+        }
+
+        /* Tema CLARO: se activa cuando el <body> tiene la clase .light */
+        body.light {
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --surface-2: #eef3f9;
+            --text: #0b1220;
+            --muted: #56687f;
+            --accent: #0e7490;
+            --accent-2: #b45309;
+            --border: #d7e0ec;
+        }
+
+        /* ============================================================
+           2. BASE
+           ============================================================ */
+
+        * {
+            box-sizing: border-box;   /* el padding no agranda los elementos */
+        }
+
+        html {
+            scroll-behavior: smooth;  /* scroll suave al hacer clic en el menú */
+            scroll-padding-top: 80px; /* para que el header fijo no tape el título */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            transition: background-color .3s ease, color .3s ease;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        /* ============================================================
+           3. HEADER Y NAVEGACIÓN
+           ============================================================ */
+
+        header {
+            position: sticky;         /* se queda pegado arriba al hacer scroll */
+            top: 0;
+            z-index: 100;
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: .9rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: .05em;
+            font-size: 1.05rem;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 1.4rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: .93rem;
+            font-weight: 600;
+            padding-bottom: 3px;
+            border-bottom: 2px solid transparent;
+            transition: color .2s, border-color .2s;
+        }
+
+        .menu a:hover {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
+
+        .acciones {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+
+        .btn-tema,
+        .btn-menu {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: .35rem .6rem;
+            font-size: 1rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .btn-tema:hover,
+        .btn-menu:hover {
+            border-color: var(--accent);
+        }
+
+        .btn-menu {
+            display: none;   /* oculto en escritorio, aparece en móvil */
+        }
+
+        /* ============================================================
+           4. PORTADA (HERO)
+           ============================================================ */
+
+        .hero {
+            padding: 4.5rem 0 3rem 0;
+        }
+
+        /* ============================================================
+           5. SECCIONES
+           ============================================================ */
+
+        section {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero {
+            border-top: none;
+        }
+
+        .titulo-seccion {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            font-size: 1.4rem;
+            margin: 0 0 1.8rem 0;
+        }
+
+        /* El numerito antes de cada título: 01. 02. 03. ... */
+        .titulo-seccion::before {
+            content: attr(data-num);
+            color: var(--accent);
+            font-size: .95rem;
+            font-weight: 700;
+        }
+
+        .texto {
+            color: var(--muted);
+            max-width: 70ch;    /* límite de ancho para que se lea cómodo */
+            margin: 0;
+        }
+
+        /* ============================================================
+           6. LÍNEA DE TIEMPO (experiencia)
+           ============================================================ */
+
+        .timeline {
+            border-left: 2px solid var(--border);
+            padding-left: 1.5rem;
+            margin-left: .5rem;
+        }
+
+        .item-timeline {
+            position: relative;
+            padding-bottom: 1.8rem;
+        }
+
+        /* El punto sobre la línea */
+        .item-timeline::before {
+            content: "";
+            position: absolute;
+            left: -2.06rem;
+            top: .55rem;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 2px solid var(--bg);
+        }
+
+        .item-timeline h3 {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .meta {
+            color: var(--accent-2);
+            font-size: .85rem;
+            font-weight: 600;
+            margin: .15rem 0 .6rem 0;
+        }
+
+        .item-timeline ul {
+            color: var(--muted);
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .item-timeline li {
+            margin-bottom: .35rem;
+        }
+
+        /* ============================================================
+           7. GRILLA Y TARJETAS
+           ============================================================ */
+
+        .grilla {
+            display: grid;
+            /* auto-fit + minmax = las columnas se acomodan solas.
+               En pantalla ancha van lado a lado, en móvil se apilan. */
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .tarjeta {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem;
+            transition: border-color .25s, transform .25s;
+        }
+
+        .tarjeta:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .tarjeta h3 {
+            margin: 0 0 .3rem 0;
+            font-size: 1.05rem;
+        }
+
+        .tarjeta p {
+            color: var(--muted);
+            margin: 0 0 .9rem 0;
+            font-size: .95rem;
+        }
+
+        .tarjeta ul {
+            color: var(--muted);
+            font-size: .93rem;
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+        }
+
+        .stack span {
+            background-color: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-size: .78rem;
+            font-weight: 600;
+            padding: .2rem .55rem;
+            border-radius: 6px;
+        }
+
+        /* ============================================================
+           8. BARRAS DE IDIOMAS
+           ============================================================ */
+
+        .idioma {
+            margin-bottom: 1.3rem;
+        }
+
+        .idioma-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: .35rem;
+        }
+
+        .idioma-cabecera strong {
+            font-size: .98rem;
+        }
+
+        .idioma-cabecera small {
+            color: var(--muted);
+        }
+
+        .barra {
+            height: 8px;
+            background-color: var(--surface-2);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        /* El relleno: el ancho se define abajo con style="width: X%" */
+        .barra div {
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 999px;
+        }
+
+        /* ============================================================
+           9. CONTACTO
+           ============================================================ */
+
+        .contactos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: .9rem;
+            margin-top: 1.5rem;
+        }
+
+        .contacto {
+            display: block;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.2rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: border-color .25s;
+        }
+
+        .contacto:hover {
+            border-color: var(--accent);
+        }
+
+        .contacto small {
+            display: block;
+            color: var(--muted);
+            font-size: .78rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: .15rem;
+        }
+
+        /* ============================================================
+           10. PIE DE PÁGINA
+           ============================================================ */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: .88rem;
+        }
+
+        /* ============================================================
+           11. RESPONSIVE (pantallas chicas)
+           ============================================================ */
+
+        @media (max-width: 720px) {
+            .btn-menu {
+                display: block;
+            }
+
+            .menu {
+                display: none;              /* oculto por defecto */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.1rem;
+                padding: 1.4rem 0;
+                background-color: var(--surface);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .menu.abierto {
+                display: flex;              /* JS agrega esta clase */
+            }
+
+            nav {
+                position: relative;
+            }
+
+            .hero {
+                padding-top: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===================== HEADER ===================== -->
+    <header>
+        <nav>
+            <div class="logo">AGUSTÍN<span> BOERI</span></div>
+
+            <ul class="menu" id="menu">
+                <li><a href="#perfil" class="enlace-menu">Perfil</a></li>
+                <li><a href="#experiencia" class="enlace-menu">Experiencia</a></li>
+                <li><a href="#proyectos" class="enlace-menu">Proyectos</a></li>
+                <li><a href="#skills" class="enlace-menu">Skills</a></li>
+                <li><a href="#idiomas" class="enlace-menu">Idiomas</a></li>
+                <li><a href="#contacto" class="enlace-menu">Contacto</a></li>
+            </ul>
+
+            <div class="acciones">
+                <button class="btn-tema" id="btn-tema" aria-label="Cambiar tema">🌙</button>
+                <button class="btn-menu" id="btn-menu" aria-label="Abrir menú">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===================== PORTADA ===================== -->
+    <section class="hero contenedor" id="inicio">
+        <p class="subtitulo" style="margin-bottom:.5rem; color: var(--accent);">Hola, soy</p>
+
+        <h1>Agustín Ignacio<br>Boeri <span>Aedo</span></h1>
+
+        <p class="subtitulo">
+            Ingeniería en Informática · Backend de baja latencia · IA aplicada al sector aeroespacial
+        </p>
+
+        <div class="etiquetas">
+            <span class="etiqueta">Santiago, Chile</span>
+            <span class="etiqueta">Ciudadano UE (ítalo-chileno)</span>
+            <span class="etiqueta">Duoc UC — mención IA</span>
+            <span class="etiqueta destacada">Toulouse 2027</span>
+        </div>
+
+        <div class="botones">
+            <a href="#proyectos" class="btn btn-primario">Ver proyectos</a>
+            <a href="#contacto" class="btn btn-secundario">Contáctame</a>
+        </div>
+    </section>
+
+    <!-- ===================== PERFIL ===================== -->
+    <section class="contenedor" id="perfil">
+        <h2 class="titulo-seccion" data-num="01.">Perfil profesional</h2>
+
+        <p class="texto">
+            Estudiante de Ingeniería en Informática en Duoc UC, mención Inteligencia Artificial,
+            actualmente cursando el tramo de titulación técnica con titulación proyectada para
+            julio de 2027. Busco una práctica técnica en el sector aeroespacial donde aplicar
+            arquitectura backend e IA aplicada.
+        </p>
+
+        <p class="texto" style="margin-top:1rem;">
+            En agosto de 2027 me traslado a Toulouse, Francia, para cursar una <em>Alternance</em>
+            a lo largo de L3, M1 y M2 en el IUT Paul Sabatier y ENSEEIHT. Mi foco técnico está en
+            sistemas backend de baja latencia y optimización con IA de procesos aeronáuticos, en
+            paralelo a una preparación diaria intensiva de francés.
+        </p>
+    </section>
+
+    <!-- ===================== EXPERIENCIA ===================== -->
+    <section class="contenedor" id="experiencia">
+        <h2 class="titulo-seccion" data-num="02.">Experiencia</h2>
+
+        <div class="timeline">
+            <div class="item-timeline">
+                <h3>Soporte TI e Infraestructura — <em>Shadowing Trainee</em></h3>
+                <p class="meta">PRDW Chile · 2025 – Actualidad</p>
+                <ul>
+                    <li>Apoyo en mantención TI, diagnóstico de hardware y soporte técnico dentro de un entorno corporativo de ingeniería de alto nivel.</li>
+                    <li>Exposición práctica a flujos de trabajo de ingeniería profesional, operaciones TI corporativas y metodologías estrictas de resolución de problemas.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PROYECTOS ===================== -->
+    <section class="contenedor" id="proyectos">
+        <h2 class="titulo-seccion" data-num="03.">Proyectos e investigación</h2>
+
+        <div class="grilla">
+            <article class="tarjeta">
+                <h3>IA Aeronáutica y Logística de Baja Latencia</h3>
+                <p class="meta" style="margin-bottom:.7rem;">Fase de investigación independiente</p>
+                <ul>
+                    <li>Orientación del aprendizaje académico y del desarrollo de proyectos hacia logística aeroespacial de misión crítica.</li>
+                    <li>Investigación de arquitecturas backend de baja latencia combinadas con modelos de IA de mantenimiento predictivo para hardware autónomo.</li>
+                </ul>
+                <div class="stack" style="margin-top:1rem;">
+                    <span>WebSockets</span>
+                    <span>Spring Boot</span>
+                    <span>IA predictiva</span>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <h3>Juegalo3D</h3>
+                <p class="meta" style="margin-bottom:.7rem;">Capstone académico</p>
+                <ul>
+                    <li>Diseño de un backend de 10 microservicios en Spring Boot con Eureka y API Gateway.</li>
+                    <li>Modelado de base de datos relacional y fundamentos sólidos de sistemas distribuidos.</li>
+                </ul>
+                <div class="stack" style="margin-top:1rem;">
+                    <span>Java</span>
+                    <span>Spring Boot</span>
+                    <span>Eureka</span>
+                    <span>API Gateway</span>
+                    <span>SQL</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ===================== SKILLS ===================== -->
+    <section class="contenedor" id="skills">
+        <h2 class="titulo-seccion" data-num="04.">Skills y certificaciones</h2>
+
+        <div class="grilla">
+            <article class="tarjeta">
+                <h3>Stack técnico</h3>
+                <p>Herramientas y tecnologías con las que trabajo.</p>
+                <div class="stack">
+                    <span>Java</span>
+                    <span>Python</span>
+                    <span>SQL</span>
+                    <span>Spring Boot</span>
+                    <span>Microservicios</span>
+                    <span>DevOps</span>
+                    <span>Git</span>
+                    <span>Agile / Scrum</span>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <h3>Certificaciones activas</h3>
+                <ul>
+                    <li>Artificial Intelligence Professional Certification (CAIPC®)</li>
+                    <li>Cybersecurity Awareness Professional (CAPC)</li>
+                    <li>DevOps Essentials (DEPC®)</li>
+                    <li>Scrum Developer &amp; Foundation (SDPC, SFPC™)</li>
+                    <li>Python Essentials 1 (Cisco)</li>
+                </ul>
+                <p style="margin:.9rem 0 0 0;">
+                    <strong style="color: var(--accent-2);">En curso:</strong>
+                    AWS Certified Cloud Practitioner
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- ===================== IDIOMAS ===================== -->
+    <section class="contenedor" id="idiomas">
+        <h2 class="titulo-seccion" data-num="05.">Idiomas</h2>
+
+        <div class="idioma">
+            <div class="idioma-cabecera">
+                <strong>Español</strong>
+                <small>Nativo</small>
+            </div>
+            <div class="barra"><div style="width: 100%;"></div></div>
+        </div>
+
+        <div class="idioma">
+            <div class="idioma-cabecera">
+                <strong>Inglés</strong>
+                <small>Avanzado — eximido del requisito de idioma de la universidad</small>
+            </div>
+            <div class="barra"><div style="width: 88%;"></div></div>
+        </div>
+
+        <div class="idioma">
+            <div class="idioma-cabecera">
+                <strong>Francés</strong>
+                <small>Objetivo B2 — TCF Complet el 18 de diciembre de 2026</small>
+            </div>
+            <div class="barra"><div style="width: 50%;"></div></div>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACTO ===================== -->
+    <section class="contenedor" id="contacto">
+        <h2 class="titulo-seccion" data-num="06.">Contacto</h2>
+
+        <p class="texto">
+            Disponible para prácticas técnicas y proyectos de backend o IA. La vía más rápida es el correo.
+        </p>
+
+        <div class="contactos">
+            <a class="contacto" href="mailto:agusboeriaedo@gmail.com">
+                <small>Correo</small>
+                agusboeriaedo@gmail.com
+            </a>
+
+            <a class="contacto" href="tel:+56957166529">
+                <small>Teléfono</small>
+                +56 9 5716 6529
+            </a>
+
+            <!-- TODO: reemplazar el # por la URL real de tu perfil de LinkedIn -->
+            <a class="contacto" href="#" target="_blank" rel="noopener">
+                <small>LinkedIn</small>
+                Agustín Boeri Aedo
+            </a>
+
+            <a class="contacto" href="https://github.com/aguboeri" target="_blank" rel="noopener">
+                <small>GitHub</small>
+                @aguboeri
+            </a>
+        </div>
+    </section>
+
+    <!-- ===================== PIE ===================== -->
+    <footer>
+        <div class="contenedor">
+            © 2026 Agustín Ignacio Boeri Aedo · Santiago, Chile
+        </div>
+    </footer>
+
+    <script>
+        /* ============================================================
+           JAVASCRIPT
+           Solo dos funcionalidades, ambas usando el mismo patrón:
+           agregar o quitar una clase CSS a un elemento.
+           ============================================================ */
+
+        /* --- 1. Menú hamburguesa (solo se ve en móvil) --- */
+        const btnMenu = document.getElementById('btn-menu');
+        const menu = document.getElementById('menu');
+        const enlaces = document.querySelectorAll('.enlace-menu');
+
+        btnMenu.addEventListener('click', () => {
+            // toggle = si la clase está, la saca; si no está, la pone
+            menu.classList.toggle('abierto');
+        });
+
+        // Al tocar cualquier enlace, cerramos el menú
+        enlaces.forEach(enlace => {
+            enlace.addEventListener('click', () => {
+                menu.classList.remove('abierto');
+            });
+        });
+
+        /* --- 2. Cambio de tema oscuro / claro --- */
+        const btnTema = document.getElementById('btn-tema');
+
+        btnTema.addEventListener('click', () => {
+            // La clase .light en el <body> reescribe todas las variables de color
+            document.body.classList.toggle('light');
+
+            // Cambiamos el ícono del botón según el tema activo
+            if (document.body.classList.contains('light')) {
+                btnTema.textContent = '☀️';
+            } else {
+                btnTema.textContent = '🌙';
+            }
+        });
+    </script>
+
+</body>
+</html>
