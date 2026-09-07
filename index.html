@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,7 @@
         }
     </script>
 
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
@@ -114,36 +115,9 @@
 <section id="proyectos" class="max-w-4xl mx-auto px-5 py-12 border-t border-borde scroll-mt-20">
     <h2 class="text-2xl font-bold mb-6"><span class="text-verde text-base">03.</span> Proyectos</h2>
 
-    <div class="grid md:grid-cols-2 gap-5">
-        <article class="bg-panel border border-borde rounded-lg p-5">
-            <h3 class="font-semibold">Juegalo3D</h3>
-            <p class="text-dorado text-sm mb-2">Capstone</p>
-            <p class="text-gray-400 text-sm mb-4">
-                Backend de 10 microservicios en Spring Boot con Eureka y API Gateway, más
-                el diseño de la base de datos. Es lo más grande que he armado hasta ahora.
-            </p>
-            <div class="flex flex-wrap gap-2 text-xs">
-                <span class="bg-fondo border border-borde rounded px-2 py-0.5 text-verde">Java</span>
-                <span class="bg-fondo border border-borde rounded px-2 py-0.5 text-verde">Spring Boot</span>
-                <span class="bg-fondo border border-borde rounded px-2 py-0.5 text-verde">Eureka</span>
-                <span class="bg-fondo border border-borde rounded px-2 py-0.5 text-verde">SQL</span>
-            </div>
-        </article>
-
-        <article class="bg-panel border border-borde rounded-lg p-5">
-            <h3 class="font-semibold">IA aeronáutica y baja latencia</h3>
-            <p class="text-dorado text-sm mb-2">En investigación</p>
-            <p class="text-gray-400 text-sm mb-4">
-                Estoy leyendo sobre arquitecturas backend de baja latencia con WebSockets y
-                modelos de mantenimiento predictivo aplicados a aviación. Todavía es solo
-                investigación, no hay código público.
-            </p>
-            <div class="flex flex-wrap gap-2 text-xs">
-                <span class="bg-fondo border border-borde rounded px-2 py-0.5 text-verde">WebSockets</span>
-                <span class="bg-fondo border border-borde rounded px-2 py-0.5 text-verde">Spring Boot</span>
-            </div>
-        </article>
-    </div>
+    <!-- las tarjetas las genera script.js desde el arreglo de proyectos -->
+    <div class="flex flex-wrap gap-2 mb-5 text-sm" id="filtros"></div>
+    <div class="grid md:grid-cols-2 gap-5" id="lista-proyectos"></div>
 </section>
 
 <!-- skills -->
@@ -218,6 +192,20 @@
             @aguboeri
         </a>
     </div>
+
+    <!-- formulario con validacion en js -->
+    <form id="form-contacto" class="grid gap-3 max-w-lg mt-8" novalidate>
+        <input type="text" id="nombre" placeholder="Tu nombre"
+               class="bg-panel border border-borde rounded p-3 text-gray-200 placeholder-gray-600">
+        <input type="text" id="correo" placeholder="Tu correo"
+               class="bg-panel border border-borde rounded p-3 text-gray-200 placeholder-gray-600">
+        <textarea id="mensaje" rows="4" placeholder="Mensaje"
+                  class="bg-panel border border-borde rounded p-3 text-gray-200 placeholder-gray-600"></textarea>
+        <p id="aviso" class="text-sm"></p>
+        <button type="submit" class="bg-verde text-fondo font-semibold px-5 py-2.5 rounded justify-self-start">
+            Enviar
+        </button>
+    </form>
 </section>
 
 <footer class="border-t border-borde py-8 text-center text-gray-500 text-sm">

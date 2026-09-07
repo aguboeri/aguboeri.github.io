@@ -1,0 +1,53 @@
+/* estilos propios, para lo que no cubro con tailwind */
+
+:root {
+    --verde: #2fbf62;
+    --fondo: #060907;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;   /* para que el header fijo no tape el titulo */
+}
+
+/* color al seleccionar texto */
+::selection {
+    background: var(--verde);
+    color: var(--fondo);
+}
+
+/* borde visible al navegar con el teclado (tab) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+}
+
+/* en celulares muy chicos el nombre se desarma */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.9rem;
+    }
+}
+
+/* si alguien imprime la pagina, dejo solo el contenido */
+@media print {
+    header,
+    #filtros,
+    #form-contacto,
+    footer {
+        display: none;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    article {
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+}
