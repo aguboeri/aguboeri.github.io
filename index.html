@@ -11,11 +11,11 @@
             theme: {
                 extend: {
                     colors: {
-                        fondo:  '#060907',
-                        panel:  '#0d1410',
-                        borde:  '#1b2b21',
-                        verde:  '#2fbf62',
-                        dorado: '#c9962f'
+                        fondo:  'var(--fondo)',
+                        panel:  'var(--panel)',
+                        borde:  'var(--borde)',
+                        verde:  'var(--verde)',
+                        dorado: 'var(--dorado)'
                     }
                 }
             }
@@ -43,7 +43,10 @@
             <li><a href="#contacto"    class="text-gray-400 hover:text-verde">Contacto</a></li>
         </ul>
 
-        <button id="btn-menu" class="md:hidden border border-borde rounded px-2 py-1">☰</button>
+        <div class="flex items-center gap-3">
+            <button id="btn-tema" class="border border-borde rounded px-2 py-1 text-sm" aria-label="Cambiar a modo claro">🌙</button>
+            <button id="btn-menu" class="md:hidden border border-borde rounded px-2 py-1">☰</button>
+        </div>
     </nav>
 </header>
 

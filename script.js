@@ -15,6 +15,28 @@ menu.querySelectorAll('a').forEach(link => {
 });
 
 
+// ---------- modo claro / oscuro ----------
+const btnTema = document.getElementById('btn-tema');
+const temaGuardado = localStorage.getItem('tema');
+
+if (temaGuardado === 'claro') {
+    document.body.classList.add('light-mode');
+    btnTema.textContent = '☀️';
+}
+
+btnTema.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+
+    if (document.body.classList.contains('light-mode')) {
+        btnTema.textContent = '☀️';
+        localStorage.setItem('tema', 'claro');
+    } else {
+        btnTema.textContent = '🌙';
+        localStorage.setItem('tema', 'oscuro');
+    }
+});
+
+
 // ---------- proyectos ----------
 // los guardo en un arreglo de objetos para no tener que tocar el html
 // cada vez que agrego uno nuevo

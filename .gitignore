@@ -7,3 +7,6 @@ out/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# copias de respaldo que dejo yo antes de editar
+*.bak

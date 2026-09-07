@@ -1,13 +1,46 @@
 /* estilos propios, para lo que no cubro con tailwind */
 
 :root {
-    --verde: #2fbf62;
-    --fondo: #060907;
+    --fondo:  #060907;
+    --panel:  #0d1410;
+    --borde:  #1b2b21;
+    --verde:  #2fbf62;
+    --dorado: #c9962f;
+}
+
+/* modo claro: mismas variables, valores invertidos.
+   se activa agregando la clase light-mode al body desde script.js */
+body.light-mode {
+    --fondo:  #f1f4f1;
+    --panel:  #ffffff;
+    --borde:  #d7ded9;
+    --verde:  #1f7a41;
+    --dorado: #a97a1f;
 }
 
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;   /* para que el header fijo no tape el titulo */
+}
+
+body {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* los grises de tailwind son colores fijos, no variables,
+   asi que en modo claro hay que pisarlos aparte */
+body.light-mode {
+    color: #1c2b21;
+}
+
+body.light-mode .text-gray-200,
+body.light-mode .text-gray-400,
+body.light-mode .text-gray-500 {
+    color: #4b5b52;
+}
+
+body.light-mode .placeholder-gray-600::placeholder {
+    color: #93a39a;
 }
 
 /* color al seleccionar texto */
